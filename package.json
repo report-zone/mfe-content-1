@@ -37,6 +37,7 @@
     "start": "webpack serve",
     "build": "webpack --config webpack.prod.js",
     "serve": "serve dist -p 3003",
+    "deploy": " REACT_APP_STAGE=production GENERATE_SOURCEMAP=true  webpack --config webpack.prod.js && aws s3 cp dist/ s3://$(grep S3_BUCKET .env.scripts | cut -d '=' -f2)/ --recursive && aws cloudfront create-invalidation --distribution-id $(grep DISTRIBUTION .env.scripts | cut -d '=' -f2) --paths '/*'",
     "clean": "rm -rf dist",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

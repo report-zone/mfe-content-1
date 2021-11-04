@@ -5,15 +5,7 @@ const deps = require("./package.json").dependencies;
 
 module.exports = {
   entry: "./src/index.ts",
-  mode: "development",
-  devServer: {
-    static: path.join(__dirname, "dist"),
-    port: 3003,
-    open: false,
-  },
-  output: {
-    publicPath: "http://localhost:3003/",
-  },
+  mode: "production",
   resolve: {
     extensions: [".ts", ".tsx", ".js"],
   },
@@ -57,7 +49,7 @@ module.exports = {
       },
     }),
     new HtmlWebpackPlugin({
-      template: "./public/index.dev.html",
+      template: "./public/index.html",
     }),
   ],
   performance: { hints: false },
