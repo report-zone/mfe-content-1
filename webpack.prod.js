@@ -48,9 +48,6 @@ module.exports = {
         },
       },
     }),
-    new HtmlWebpackPlugin({
-      template: "./public/index.html",
-    }),
   ],
   performance: { hints: false },
 };
