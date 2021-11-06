@@ -1,6 +1,10 @@
 import React from "react";
 import data from "../data/groups.json";
 import { useTable, useRowSelect } from "react-table";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
+import VisualizationContent from "./VisualizationContent";
 
 const IndeterminateCheckbox = React.forwardRef(
   ({ indeterminate, ...rest }: any, ref) => {
@@ -20,6 +24,12 @@ const IndeterminateCheckbox = React.forwardRef(
 );
 
 export default function Groups() {
+  const [openVis, setOpenVis] = React.useState(false);
+
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setOpenVis(event.target.checked);
+  };
+
   const defaultColumn = React.useMemo(
     () => ({
       minWidth: 50,
@@ -83,9 +93,18 @@ export default function Groups() {
     tableInstance;
   return (
     <div
-      style={{ height: "calc(100vh - 64px)", overflow: "auto", width: "100%" }}
+      style={{
+        marginLeft: "16px",
+        display: "flex",
+        height: "calc(100vh - 64px)",
+        overflow: "auto",
+        width: "100%",
+      }}
     >
-      <table {...getTableProps()} style={{ border: "solid 1px blue" }}>
+      <table
+        {...getTableProps()}
+        style={{ border: "solid 1px blue", flexGrow: 1 }}
+      >
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
@@ -131,6 +150,28 @@ export default function Groups() {
           })}
         </tbody>
       </table>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          marginLeft: "16px",
+          width: openVis ? "calc(50% - 32px)" : "350px",
+        }}
+      >
+        <FormGroup>
+          <FormControlLabel
+            control={<Switch onChange={onChange} />}
+            label="Show Network Graph"
+          />
+        </FormGroup>
+        {openVis ? (
+          <React.Suspense fallback={<div>Loading Visualization...</div>}>
+            <div style={{ width: "calc(100% - 16px)" }}>
+              <VisualizationContent></VisualizationContent>
+            </div>
+          </React.Suspense>
+        ) : null}
+      </div>
     </div>
   );
 }

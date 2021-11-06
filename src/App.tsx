@@ -1,11 +1,9 @@
-import Groups from './components/Groups';
-
-
+import Groups from "./components/Groups";
 
 function App() {
   return (
     <div className="App">
-      <Groups/>
+      <Groups />
     </div>
   );
 }

@@ -35,6 +35,9 @@ module.exports = {
         // expose each component
         "./Groups": "./src/components/Groups",
       },
+      remotes:{
+        visualization:"visualization"
+      },
       shared: {
         ...deps,
         react: { singleton: true, eager: true, requiredVersion: deps.react },
