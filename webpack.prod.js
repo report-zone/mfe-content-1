@@ -32,22 +32,16 @@ module.exports = {
       },
       shared: {
         ...deps,
-        react: { singleton: true, eager: true, requiredVersion: deps.react },
-        uuid: { singleton: true, eager: true, requiredVersion: deps.uuid },
+        react: { singleton: true },
+        uuid: { singleton: true },
         "react-dom": {
           singleton: true,
-          eager: true,
-          requiredVersion: deps["react-dom"],
         },
         "@mui/material": {
           singleton: true,
-          eager: true,
-          requiredVersion: deps["@mui/material"],
         },
         "@mui/x-data-grid": {
           singleton: true,
-          eager: true,
-          requiredVersion: deps["@mui/x-data-grid"],
         },
       },
     }),
